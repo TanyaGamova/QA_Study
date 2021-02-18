@@ -9,6 +9,8 @@ public class Main {
     }
 
 
+    // 2.1. Сортировка массива
+
     // Метод сортировки
     // array - входной массив
     // return - сортированный массив
@@ -58,5 +60,57 @@ public class Main {
          // сортировка подучастков массива
         thanosSortImpl( array, l, mid );
         thanosSortImpl( array, mid + 1, r );
+    }
+
+
+    // 2.2 Валидация телефонного номера
+
+    // Метод проверки телефонного номера
+    // inputNumber - входная строка с номером
+    public static String[] ValidatePhoneNumber( String inputNumber ){
+        String number = inputNumber;
+        String[] result = new String[2];
+
+        if ( number.startsWith( "+7" ) )
+        {
+            number.replaceFirst( "+7", "8" );
+            result[1] += "Замена +7 на 8; ";
+        }
+
+        boolean spacesOrBounds = false;
+
+        if ( number.contains( " " ) )
+        {
+            number.replaceAll( " ", "" );
+            spacesOrBounds = true;
+        }
+        if ( number.contains( " " ) )
+        {
+            number.replaceAll( "(", "" );
+            spacesOrBounds = true;
+        }
+
+        if ( number.contains( " " ) )
+        {
+            number.replaceAll( ")", "" );
+            spacesOrBounds = true;
+        }
+
+        if ( spacesOrBounds )
+            result[1] += "В номере есть пробелы и/или скобки; ";
+
+        if ( number.length() != 11 )
+        {
+            result[0] = "Введен некорректный номер";
+            result[1] += "Количество символов не 11; ";
+        }
+        else
+        {
+            result[0] = number;
+            if ( result[1].isEmpty() )
+                result[1] = " Изменений не было";
+        }
+
+        return result;
     }
 }
